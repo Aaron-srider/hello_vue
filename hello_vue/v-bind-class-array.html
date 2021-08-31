@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    .red {
+        color: red;
+    }
+
+    .black {
+        color: black;
+    }
+</style>
+
+<div id="app">
+    <h1 v-bind:class="[class1, class2]">hello</h1>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue",
+            class1: "class1",
+            class2: "class2"
+        },
+        methods: {
+            changeColor() {
+
+            },
+            changeClass() {
+                return {colorful: this.isActive}
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

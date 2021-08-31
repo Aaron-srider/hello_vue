@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+    <form action="baidu">
+        <input type="submit" value="提交" v-on:click.prevent="submitAction()">
+    </form>
+
+    <a href="baidu" v-on:click.prevent="anchorAction()">hello</a>
+    <input type="checkbox" v-on:click.prevent="checkBoxAction()">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue"
+        },
+        methods: {
+            submitAction() {
+                console.log("submit")
+            },
+            anchorAction() {
+                console.log("jump")
+            },
+            checkBoxAction() {
+                console.log("check")
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <!--遍历数组-->
+    <li v-for="(item) in movies">{{item}}</li>
+    <br/>
+    <li v-for="(item, index) in movies">{{index}}-{{item}}</li>
+
+
+    <br/>
+
+    <!--遍历对象-->
+    <li v-for="item in foo">{{item}}</li>
+    <br/>
+    <li v-for="(value, key, index) in foo">{{index}}-{{value}}-{{key}}</li>
+
+
+</div>
+
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            movies: ["a", "b"],
+            foo: {
+                name: "wc",
+                age: 12
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

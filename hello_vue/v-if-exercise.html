@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+   <span v-if="isUserPassword()">
+       <label for="username">用户名</label>
+       <input type="text" id="username" placeholder="用户名">
+   </span>
+    <span v-else>
+        <label for="email">邮箱</label>
+        <input type="text" id="email" placeholder="邮箱">
+    </span>
+
+    <button v-on:click="change()">更换登录方式</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue",
+            isUser: true
+        },
+        methods: {
+            isUserPassword() {
+                return this.isUser;
+            },
+            change() {
+                this.isUser = !this.isUser;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

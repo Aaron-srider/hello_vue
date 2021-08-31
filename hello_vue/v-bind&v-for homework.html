@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .activate {
+        color: red;
+    }
+</style>
+<div id="app">
+    <ul>
+        <li v-on:click="changeIndex(index)" v-for="(item, index) in messages" v-bind:class="{activate: isCurrentIndex(index)}">{{item}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            messages: ["first", "second", "third", "forth"],
+            //targetIndex下标的<li>应该加上class="activate"属性
+            targetIndex: 0
+        },
+        methods: {
+            //遍历判断<li>的index是否为targetIndex
+            isCurrentIndex(index) {
+                return this.targetIndex === index;
+            },
+            //将点击的<li>下标记录到targetIndex
+            changeIndex(index) {
+                this.targetIndex = index;
+            }
+
+        }
+    })
+</script>
+
+</body>
+</html>

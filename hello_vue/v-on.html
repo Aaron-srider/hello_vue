@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <button v-on:click="fun($event)">获取鼠标事件</button><br>
+    <button v-on:click="fun()">获取鼠标事件</button><br>
+    <button v-on:click="fun">获取鼠标事件</button><br>
+    <input v-bind:value="mousePos.x"><br>
+    <input v-bind:value="mousePos.y"><br>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue",
+            mousePos: {}
+        },
+        methods: {
+            fun(event) {
+                if(event === undefined) {
+                    this.mousePos = {
+                        x: "undefined",
+                        y: "undefined"
+                    }
+                } else {
+                    console.log(event)
+                    this.mousePos = {
+                        x: event.x,
+                        y: event.y
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

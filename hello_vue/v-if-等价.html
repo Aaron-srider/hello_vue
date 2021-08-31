@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    {{showContent}}<input v-model="score">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue",
+            score: 0
+        },
+        computed: {
+            showContent() {
+                let score = this.score;
+                if (score >= 90) {
+                    return "优秀"
+                } else if (score >= 80) {
+                    return "良好"
+                } else if (score >= 60) {
+                    return "合格"
+                } else {
+                    return "不合格"
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
