@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<<div id="app">
+
+  <label v-for="item in userChoices">
+    <input type="checkbox" :value="item">{{item}}
+  </label>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue",
+          userChoices:["足球", "篮球", "排球"]
+        }
+    })
+</script>
+
+</body>
+</html>
