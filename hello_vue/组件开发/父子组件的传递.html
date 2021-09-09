@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpm :newsTitle="title" :content="content"></cpm>
+    <cpm :news-title="title1" :content="content1"></cpm>
+</div>
+
+<!--组件模板-->
+<template id="temp1">
+    <div>
+        <h2>{{newsTitle}}</h2>
+        <p>{{content}}</p>
+    </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue",
+            title: "big news",
+            content: "xxxxxxxxxxxxxxxx",
+            title1: "big news1",
+            content1: "xxxxxxxxxxxxxxxx1"
+
+        },
+        components: {
+            cpm: {
+                template: "#temp1",
+                props: {
+                    newsTitle: {
+                        type: String,
+                        required: true
+                    },
+                    content: {
+                        type: String,
+                        required: true
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

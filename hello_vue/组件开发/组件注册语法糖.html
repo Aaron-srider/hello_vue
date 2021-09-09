@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <global></global>
+    <local></local>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+
+    <!--注册全局组件-->
+    Vue.component("global", {
+        template: `
+          <div>
+          global
+              <p>标题</p>
+              <p>内容</p>
+          </div>
+        `
+    })
+
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue"
+        },
+        //注册局部组件
+        components: {
+            local: {
+                template: `
+                      <div>
+                          local
+                          <p>标题</p>
+                          <p>内容</p>
+                      </div>`
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

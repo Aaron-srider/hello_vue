@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <counter></counter>
+    <counter></counter>
+    <counter></counter>
+</div>
+
+<!--组件模板-->
+<template id="temp1">
+    <div>
+        <h2>计数器:{{count}}</h2>
+        <button @click="increment()">+</button>
+        <button @click="decrement()">-</button>
+    </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+
+    <!--注册全局组件-->
+    Vue.component("counter", {
+        template: "#temp1",
+        data() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            increment() {
+                this.count++;
+            },
+            decrement() {
+                this.count--;
+            }
+        }
+    })
+
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue"
+        }
+    })
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
