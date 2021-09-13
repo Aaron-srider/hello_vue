@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <comp>
+        <button slot="slot1">按钮</button>
+        <input slot="slot2" placeholder="这是文本框">
+        <p slot="slot3">这是一段文字</p>
+    </comp>
+
+    <comp></comp>
+</div>
+
+<template id="comp">
+    <div>
+        我是带有插槽的子组件
+        <!--插槽-->
+        <div>
+            <slot name="slot1"><h3>这是插槽1</h3></slot>
+        </div>
+        <div>
+            <slot name="slot2"><h3>这是插槽2</h3></slot>
+        </div>
+        <div>
+            <slot name="slot3"><h3>这是插槽3</h3></slot>
+        </div>
+    </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue"
+        }, methods: {},
+        components: {
+            //子组件
+            comp: {
+                template: "#comp"
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
