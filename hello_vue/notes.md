@@ -120,6 +120,10 @@ v-model 实质是两个指令集和（语法糖）：
 </script>
 ```
 
+注意点：组件的 `template` 中如果有不知一个标签内容，那么必须将他们包裹在一个大标签比如`<h2/>`、`<div/>`中，才能将他们全部显示，否则只显示第一个标签。
+
+
+
 组件使用语法糖：
 
 使用组件需要创建后再注册:
@@ -471,3 +475,212 @@ comp2的模板引用了comp1的模板：
     })
 </script>
 ```
+
+子组件向父组件传递数据：
+子组件产生事件，父组件中使用事件接收。父组件中在methods中定义方法作为监听者，当子组件产生事件，事件上浮到父组件，触发监听者，执行请求代码。
+```vue
+<div id="app">
+    <!--监听子组件上浮的事件-->
+    <comp @myevent="request($event)"></comp>
+</div>
+
+<template id="comp">
+    <div>
+        子组件
+        <button v-for="item in items" @click="userHit(item)">{{item.name}}</button>
+    </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue"
+        },
+        methods: {
+            request(event) {
+                console.log(event)
+            }
+        },
+        components: {
+            //子组件
+            comp: {
+                template: "#comp",
+                data() {
+                    return {
+                        items: [
+                            {id: 1, name: "aaa"},
+                            {id: 2, name: "bbb"},
+                            {id: 3, name: "ccc"}
+                        ]
+                    }
+                },
+                methods: {
+                    userHit(item) {
+                        //子组件中发送事件
+                        this.$emit("myevent", item);
+                    }
+                }
+            }
+        }
+    })
+</script>
+```
+
+![image-20210913222351522](https://mymdimage.oss-cn-beijing.aliyuncs.com/typoraImage/image-20210913222351522.png)
+
+![image-20210913222317772](https://mymdimage.oss-cn-beijing.aliyuncs.com/typoraImage/image-20210913222317772.png)
+
+
+插槽slot
+组件需要扩展性，要有固定的东西（便于节省代码），也要能扩展（便于复用和扩展），slot插槽就是为了向组件中插入不同的东西。
+* 使用`<slot>default elements</slot>`代表一个插槽。
+* 使用组件时标签对中的所有标签放入对应的插槽中。
+* 多个插槽时为插槽指定名字`<slot name="slotName">default elements</slot>`，插入元素时指定插入的插槽名称即可`<comp><elem slot="slotName">text</elem></comp>`。
+```vue
+<div id="app">
+    <comp>
+        <button slot="slot1">按钮</button>
+        <input slot="slot2" placeholder="这是文本框">
+        <p slot="slot3">这是一段文字</p>
+    </comp>
+
+    <comp></comp>
+</div>
+
+<template id="comp">
+    <div>
+        我是带有插槽的子组件
+        <!--插槽-->
+        <div>
+            <slot name="slot1"><h3>这是插槽1</h3></slot>
+        </div>
+        <div>
+            <slot name="slot2"><h3>这是插槽2</h3></slot>
+        </div>
+        <div>
+            <slot name="slot3"><h3>这是插槽3</h3></slot>
+        </div>
+    </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue"
+        }, methods: {},
+        components: {
+            //子组件
+            comp: {
+                template: "#comp"
+            }
+        }
+    })
+</script>
+```
+
+作用域插槽：
+有可能想在插槽中插入的标签需要子组件中的数据，这可以通过slot-scope字段实现。
+
+* 使用组件时使用template标签，写上slot-scope属性，属性值就是为组件slot起的别名，假设是slotObj。
+* 在插槽标签上使用v-bind将子标签中的数据绑定到插槽属性上，如：`<slot :abc="movies"></slot>`。
+* 在`<template>`中使用`插槽别名.插槽上的属性名`获取插槽属性上绑定的数据。
+* 总结就是：将子组件的数据绑定在插槽属性上，在父组件中通过`插槽别名.插槽上的属性名`的方式获取插槽属性上绑定的值。
+下面是示例：
+```vue
+<div id="app">
+    <comp></comp>
+
+    <comp>
+        <template slot-scope="slotObj">
+            {{showSlotData(slotObj.abc)}}
+        </template>
+    </comp>
+
+</div>
+
+<template id="comp">
+    <div>
+        我是带有插槽的子组件
+        <!--插槽-->
+        <div>
+            <slot :abc="movies">
+                <h3 v-for="item in movies">{{item}}</h3>
+            </slot>
+        </div>
+    </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue"
+        },
+        methods: {
+            showSlotData(data) {
+                let nameArr=[];
+                for(let i = 0; i < data.length; i++ ){
+                    nameArr.push(data[i]);
+                }
+                return nameArr.join(" - ");
+            }
+        },
+        components: {
+            //子组件
+            comp: {
+                template: "#comp",
+                data() {
+                    return {
+                        movies:[
+                            "血战上海滩","抢滩登陆","东京沦陷"
+                        ]
+                    }
+                }
+            }
+        }
+    })
+</script>
+```
+
+# webpack
+
+## 安装
+
+* 支持并强调模块化开发:webpack将前端模块化的解决方案（es6,commonjs,amd等）转换成浏览器能识别的代码。
+* 处理模块间的依赖关系。
+* 附带打包功能：json,css,图片都能打包。
+
+注意，webpack依赖node.js环境，安装node.js时自动安装npm（node package manage）工具，方便管理node运行时用到的各种包。
+webpack -> node -> npm
+
+全局安装(命令行中能使用)webpack:
+
+```
+npm install webpack -g 
+```
+
+![image-20210915074241694](https://mymdimage.oss-cn-beijing.aliyuncs.com/typoraImage/image-20210915074241694.png)
+
+![image-20210915074227050](https://mymdimage.oss-cn-beijing.aliyuncs.com/typoraImage/image-20210915074227050.png)
+
+## 打包
+
+初学webpack的项目结构:
+
+![image-20210915075627058](https://mymdimage.oss-cn-beijing.aliyuncs.com/typoraImage/image-20210915075627058.png)
+
+src中存放js源代码，dist存放打包的源码包，index.html中引用打包好的源码包。
+
+使用webpack将js打包，webpack自动识别包中导入的依赖并连同打包：（使用任何模块化模型webpack都能识别）
+
+```js
+webpack ./main.js ../dist/bundle.js
+```
+
+![image-20210915075445425](https://mymdimage.oss-cn-beijing.aliyuncs.com/typoraImage/image-20210915075445425.png)
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <comp></comp>
+
+    <comp>
+        <template slot-scope="slotObj">
+            {{showSlotData(slotObj.abc)}}
+        </template>
+    </comp>
+
+</div>
+
+<template id="comp">
+    <div>
+        我是带有插槽的子组件
+        <!--插槽-->
+        <div>
+            <slot :abc="movies">
+                <h3 v-for="item in movies">{{item}}</h3>
+            </slot>
+        </div>
+    </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue"
+        },
+        methods: {
+            showSlotData(data) {
+                let nameArr=[];
+                for(let i = 0; i < data.length; i++ ){
+                    nameArr.push(data[i]);
+                }
+                return nameArr.join(" - ");
+            }
+        },
+        components: {
+            //子组件
+            comp: {
+                template: "#comp",
+                data() {
+                    return {
+                        movies:[
+                            "血战上海滩","抢滩登陆","东京沦陷"
+                        ]
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

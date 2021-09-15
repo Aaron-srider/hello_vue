@@ -8,16 +8,18 @@
 <body>
 
 <div id="counter">
-   {{counter}}</br>
-    <button v-on:click="add">+</button></br>
-    <button v-on:click="sub">-</button></br>
+    {{counter}}</br>
+    <button v-on:click="add">+</button>
+    </br>
+    <button v-on:click="sub">-</button>
+    </br>
 </div>
 
 <script>
     let app = new Vue({
         el: "#counter",
         data: {
-          counter:0
+            counter: 0
         },
         methods: {
             add() {
