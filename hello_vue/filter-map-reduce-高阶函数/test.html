@@ -11,7 +11,7 @@
     //filter
     const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 
-    const result = words.filter(function(n) {
+    const result = words.filter(function (n) {
         return n.length > 6
     });
 
@@ -19,14 +19,12 @@
     // expected output: Array ["exuberant", "destruction", "present"]
 
 
-
-
     //map
 
     const array1 = [1, 4, 9, 16];
 
     // pass a function to map
-    const map1 = array1.map(function(n) {
+    const map1 = array1.map(function (n) {
         return n * 2;
     });
 
@@ -34,11 +32,9 @@
     // expected output: Array [2, 8, 18, 32]
 
 
-
-
     //reduce
     const array2 = [1, 2, 3, 4];
-    const reducer = function(accumulator, currentValue){
+    const reducer = function (accumulator, currentValue) {
         return accumulator + currentValue
     }
 
@@ -49,9 +45,6 @@
     // 5 + 1 + 2 + 3 + 4
     console.log(array2.reduce(reducer, 5));
     // expected output: 15
-
-
-
 
 
 </script>
