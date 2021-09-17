@@ -9,7 +9,7 @@
         name: "user",
         computed: {
             userName() {
-                return this.$route.params.name
+                return this.$route.params.userName
             }
         }
     }
