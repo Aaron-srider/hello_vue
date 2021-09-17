@@ -1,5 +1,3 @@
-import {sum} from "./js/mainUtils.js"
-require("./css/testcss.css")
+import * as moduleA from "./js/moduleA.js"
 
-
-console.log(sum(1, 3))
+console.log("result:", moduleA.result)
