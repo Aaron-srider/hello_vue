@@ -2,17 +2,17 @@
   <div id="app">
     <router-view/>
 
-    <tabBar/>
+    <PageBottom/>
   </div>
 </template>
 
 <script>
-  import tabBar from "./components/tabbar/TabBar.vue"
+  import PageBottom from "./components/tabbar/PageBottom.vue"
 
   export default {
     name: 'App',
-    components: {
-      tabBar
+    components:{
+      PageBottom
     }
   }
 </script>

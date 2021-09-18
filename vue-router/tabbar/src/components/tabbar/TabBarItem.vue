@@ -8,7 +8,7 @@
       <slot name="img_active"/>
     </div>
 
-    <div v-bind:class="{active: isItemActive}">
+    <div v-bind:class="{active: isItemActive}" :style="activeStyle">
       <slot name="content"/>
     </div>
   </div>
@@ -21,6 +21,11 @@
       path: {
         type: String,
         required: false
+      },
+      activeColor: {
+        type: String,
+        required: false,
+        default: "red"
       }
     },
     data() {
@@ -35,6 +40,9 @@
     computed:{
       isItemActive() {
         return this.$route.path.indexOf(this.path) !== -1
+      },
+      activeStyle() {
+        return this.isItemActive ? {color: this.activeColor} : {}
       }
     }
   }
