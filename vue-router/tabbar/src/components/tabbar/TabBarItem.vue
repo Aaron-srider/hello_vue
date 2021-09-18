@@ -1,7 +1,16 @@
 <template>
-  <div class="tab-bar-item">
-    <slot name="content"/>
-    <slot name="img"/>
+  <div class="tab-bar-item" @click="onItemClick()">
+
+    <div v-if="!isItemActive">
+      <slot name="img"/>
+    </div>
+    <div v-else>
+      <slot name="img_active"/>
+    </div>
+
+    <div v-bind:class="{active: isItemActive}">
+      <slot name="content"/>
+    </div>
   </div>
 </template>
 
@@ -9,10 +18,28 @@
   export default {
     name: "tab-bar-item",
     props: {
+      path: {
+        type: String,
+        required: false
+      }
+    },
+    data() {
+      return {
+      }
+    },
+    methods: {
+      onItemClick() {
+        this.$router.replace(this.path)
+      }
+    },
+    computed:{
+      isItemActive() {
+        return this.$route.path.indexOf(this.path) !== -1
+      }
     }
   }
 </script>
 
 <style scoped>
-@import "tabBarItem.css";
+  @import "tabBarItem.css";
 </style>
