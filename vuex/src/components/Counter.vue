@@ -13,9 +13,9 @@
         name: "counter",
         methods: {
           add() {
-            this.$store.commit({
-              type: types.COUNTERADD,
-              n: 4
+            this.$store.dispatch({
+              type: "increment",
+              n: 8
             });
           },
           minus() {
