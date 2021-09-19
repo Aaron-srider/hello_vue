@@ -1,6 +1,6 @@
 <template>
     <div>
-      {{$store.state.counter}}
+      {{$store.getters.powerCount}}
   <button @click="add()">+</button>
   <button @click="minus()">-</button>
     </div>
