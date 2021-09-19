@@ -1,5 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import * as types from "./types.js"
 
 Vue.use(Vuex)
 
@@ -13,17 +14,14 @@ const vuex = new Vuex.Store({
       {name: "cc", age: 19},
     ]
   }, mutations: {
-    counterAdd(state) {
-      state.counter++;
+    [types.COUNTERADD](state, payload) {
+      state.counter+=payload.n;
     },
-    counterMinus(state) {
-      state.counter--;
+    [types.COUNTERMINUS](state, payload) {
+      state.counter-=payload.n;
     }
   },
   getters: {
-    powerCount(state) {
-      return state.counter * state.counter
-    },
 
     filterStudents(state) {
       return function (age) {
